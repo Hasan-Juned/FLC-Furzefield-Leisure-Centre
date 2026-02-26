@@ -1,0 +1,68 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.flc;
+
+/**
+ *
+ * @author Hassan
+ */
+public class Booking {
+    
+    private String bookingId;
+    private Member member;
+    private Lesson lesson;
+    private String status;
+    private String review;
+    private int rating;
+    
+    public Booking(String bookingId, Member member, Lesson lesson){
+        this.bookingId = bookingId;
+        this.member = member;
+        this.lesson = lesson;
+        this.status = "booked";
+    }
+    
+    /// below these getter methods are fetching the lesson, status, review and rating of the leisure feature type
+
+    public String getBookingId(){
+        return bookingId;
+    }
+    
+    public Member getMember(){
+        return member;
+    }
+    
+    public Lesson getLesson(){
+        return lesson;
+    }
+    
+    public String getStatus(){
+        return status;
+    }
+    
+    public String getReview(){
+        return review;
+    }
+    
+    public int getRating(){
+        return rating;
+    }
+    
+    /// below these setter methods set the lesson, status, review and rating of the leisure feature type
+    public void setLesson(Lesson lesson){
+        this.lesson = lesson;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
+    public void setReview(String review){
+        this.review =review;
+    }
+    public void setRating(int rating){
+        this.rating = rating;
+    }
+}
