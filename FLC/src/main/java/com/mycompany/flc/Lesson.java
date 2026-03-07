@@ -75,4 +75,18 @@ public class Lesson {
     public List<Integer> getRatings(){
         return ratings;
     }
+    
+    public boolean hasSpace(){
+        return bookings.size() < capacity; // enforce the max 4 members
+    }
+    
+    /// user can book lesson by this method
+    public void addBooking(Booking booking){
+        bookings.add(booking);
+    }
+    
+    /// user can remove lesson by this method
+    public void removeBooking(Booking booking){
+        bookings.remove(booking);
+    }
 }
