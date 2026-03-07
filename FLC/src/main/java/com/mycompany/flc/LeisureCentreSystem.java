@@ -23,6 +23,7 @@ public class LeisureCentreSystem {
         System.out.println("System Started...");
     }
     
+    /// this method responsibility is being created 48 lessons 
     private void createTimeTableData(){
         String[] exerciseTypes = {"Yoga", "Zumba", "Box Fit", "Aquacise"};
         double[] prices ={10.0, 12.0, 15.0, 11.0};
