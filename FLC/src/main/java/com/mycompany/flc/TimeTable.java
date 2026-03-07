@@ -26,4 +26,36 @@ public class TimeTable {
     public List<Lesson> getLesson(){
         return lessons;
     }
+    
+    // by this method user can search lesson by day
+    public List<Lesson> searchByDay(String day){
+        List<Lesson> result = new ArrayList<>();
+        for(Lesson lesson: lessons){
+            if(lesson.getDay().equalsIgnoreCase(day)){
+                result.add(lesson);
+            }
+        }
+        return result;
+    }
+    
+    // by this method user can search lesson by Exercise type
+    public List<Lesson> searchByExercise(String exercise){
+        List<Lesson> result = new ArrayList<>();
+        for(Lesson lesson: lessons){
+            if(lesson.getExerciseType().equalsIgnoreCase(exercise)){
+                result.add(lesson);
+            }
+        }
+        return result;
+    }
+    
+    // by this method user can search lesson by ID
+    public Lesson findLessonById(String lessonId){
+        for(Lesson lesson: lessons){
+            if(lesson.getLessonId().equalsIgnoreCase(lessonId)){
+                return lesson;
+            }
+        }
+        return null;
+    }
 }
