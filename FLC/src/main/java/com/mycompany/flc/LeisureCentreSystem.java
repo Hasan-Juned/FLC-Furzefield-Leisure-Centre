@@ -38,6 +38,7 @@ public class LeisureCentreSystem {
             System.out.println("\n*** Furzefield Leisure Centre System ***");
             System.out.println("1. View Lessons");
             System.out.println("2. Book Lesson");
+            System.out.println("3. Change/Cancel Booking");
             System.out.println("0. Exit");
             
             choice = input.nextInt();
@@ -46,6 +47,7 @@ public class LeisureCentreSystem {
             switch(choice){
                 case 1 -> displayLessons(timeTable.getLesson());
                 case 2 -> bookLesson();
+                case 3 -> changeOrCancelBooking();
             }
             
         }while(choice != 0);
@@ -134,6 +136,13 @@ public class LeisureCentreSystem {
         
         Booking booking = new Booking(bookingId, selectedMember, lesson);
         
+        // here checking first, if there has any duplicate value or not. if has then same id membe won't create new booking
+        if(hasDuplicateBooking(selectedMember, lesson)){
+            System.out.println("You have already booked this lesson");
+            return;
+        }
+        
+        
         bookings.add(booking);
         selectedMember.addBooking(booking);
         lesson.addBooking(booking);
@@ -142,6 +151,75 @@ public class LeisureCentreSystem {
         
     }
     
+    // this method checks isn't there has any duplicate booking or not, depending on the true/false
+    private boolean hasDuplicateBooking(Member member, Lesson lesson){
+        for(Booking booking: member.getBookings()){
+            if(booking.getLesson().getLessonId().equals(lesson.getLessonId()) && !booking.getStatus().equals("cancelled")){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /// this method's responsibility is to change or cancel booking
+    private void changeOrCancelBooking(){
+        System.out.println("Enter Booking ID: ");
+        String bookingId = input.nextLine();
+        
+        Booking selectedBooking = null;
+        
+        for(Booking b: bookings){
+            
+            if(b.getBookingId().equalsIgnoreCase(bookingId)){
+                selectedBooking = b;
+                break;
+            }
+        }
+        if(selectedBooking == null){
+            System.out.println("Booking not found");
+            return;
+        }
+        
+        System.out.println("1. Change Lesson");
+        System.out.println("2. Cancel Booking");
+        
+        int choice = input.nextInt();
+        input.nextLine();
+        
+        if(choice == 1){
+            System.out.println("Enter new Lesson ID: ");
+            String newLessonId = input.nextLine();
+            
+            Lesson newLesson =  timeTable.findLessonById(newLessonId);
+            
+            if(newLesson == null){
+                System.out.println("Lesson not found");
+                return;
+            }
+            
+            if(!newLesson.hasSpace()){
+                System.out.println("Lesson is full");
+                return;
+            }
+            
+            Lesson oldLesson = selectedBooking.getLesson();
+            
+            oldLesson.removeBooking(selectedBooking);
+            newLesson.addBooking(selectedBooking);
+            
+            selectedBooking.setLesson(newLesson);
+            selectedBooking.setStatus("Changed");
+            System.out.println("Booking changed Successfully");
+            
+        } else if(choice == 2){
+            Lesson lesson = selectedBooking.getLesson();
+            
+            lesson.removeBooking(selectedBooking);
+            selectedBooking.setStatus("Cancelled");
+            
+            System.out.println("Booking cancelled");
+        }
+    }
     
     /// this is main function which is the starting point of the code entry
     public static void main(String[] args) {
