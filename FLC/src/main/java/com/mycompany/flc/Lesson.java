@@ -11,6 +11,8 @@ import java.util.List;
  *
  * @author Hassan
  */
+
+
 public class Lesson {
     
     private String lessonId;
@@ -90,4 +92,3 @@ public class Lesson {
         bookings.remove(booking);
     }
 }
-/// chatgpt er last er ota implement kortam
