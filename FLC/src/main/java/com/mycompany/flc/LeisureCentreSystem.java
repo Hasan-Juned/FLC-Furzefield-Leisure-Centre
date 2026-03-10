@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
+
 public class LeisureCentreSystem {
     
     private List<Member> members;
@@ -232,3 +235,6 @@ public class LeisureCentreSystem {
     
     }
 }
+
+
+/// gpt er last er 2 part coding kore project ses
