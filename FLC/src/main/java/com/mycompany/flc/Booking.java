@@ -13,7 +13,7 @@ public class Booking {
     private String bookingId;
     private Member member;
     private Lesson lesson;
-    private String status;
+    private BookingStatus status; /// enum bookingstatus used here
     private String review;
     private int rating;
     
@@ -21,7 +21,7 @@ public class Booking {
         this.bookingId = bookingId;
         this.member = member;
         this.lesson = lesson;
-        this.status = "booked";
+        this.status = BookingStatus.BOOKED; /// refactored here
     }
     
     /// below these getter methods are fetching the lesson, status, review and rating of the leisure feature type
@@ -38,7 +38,7 @@ public class Booking {
         return lesson;
     }
     
-    public String getStatus(){
+    public BookingStatus getStatus(){ // refactor here
         return status;
     }
     
@@ -55,7 +55,7 @@ public class Booking {
         this.lesson = lesson;
     }
     
-    public void setStatus(String status){
+    public void setStatus(BookingStatus status){ /// refactor here
         this.status = status;
     }
     
