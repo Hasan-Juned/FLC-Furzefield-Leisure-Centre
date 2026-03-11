@@ -112,5 +112,13 @@ public class Lesson {
         return (double) total/ratings.size();
     }
     
+    @Override
+    public String toString(){ /// add this for better code/refactoring
+        return lessonId + " | "+
+                exerciseType + " | "+
+                day + " | "+
+                timeSlot + " | GBP " + price;
+    }
+    
     
 }
