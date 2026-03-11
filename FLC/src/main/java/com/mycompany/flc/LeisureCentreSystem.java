@@ -43,6 +43,8 @@ public class LeisureCentreSystem {
             System.out.println("2. Book Lesson");
             System.out.println("3. Change/Cancel Booking");
             System.out.println("4. Attend Lesson");
+            System.out.println("5. Monthly Lesson Report");
+            System.out.println("6. Champion Exercise Report");
             System.out.println("0. Exit");
             
             choice = input.nextInt();
@@ -53,6 +55,8 @@ public class LeisureCentreSystem {
                 case 2 -> bookLesson();
                 case 3 -> changeOrCancelBooking();
                 case 4 -> attendLesson();
+                case 5 -> generateMonthlyLessonReport();
+                case 6 -> generateChampionReport();
             }
             
         }while(choice != 0);
@@ -262,6 +266,82 @@ public class LeisureCentreSystem {
         lesson.addRating(rating);
         
         System.out.println("Lesson attended");
+    }
+    
+    // this method will be genearated for the monthly reports
+    private void generateMonthlyLessonReport(){
+        System.out.println("Monthly Lesson Report\n");
+        
+        for(Lesson lesson: timeTable.getLesson()){
+            
+            int attendanceCount = 0;
+            
+            for(Booking booking: lesson.getBookings()){
+                if(booking.getStatus().equals("attended")){
+                    attendanceCount++;
+                }
+            }
+            double avgRating = lesson.calculateAvgRating();
+            
+            System.out.println(lesson.getLessonId() + " | " +
+                    lesson.getExerciseType() + " | "+
+                    lesson.getDay() + " | " +
+                    lesson.getTimeSlot() + " | Attendees: "+
+                    attendanceCount + " | Avg Rating: "+
+                    avgRating);
+        }
+    }
+    
+    private void generateChampionReport(){
+        double yogaIncome = 0;
+        double zumbaIncome = 0;
+        double boxfitIncome = 0;
+        double aquaIncome = 0;
+        
+        for(Lesson lesson: timeTable.getLesson()){
+            int attendees = 0;
+            
+            for(Booking booking: lesson.getBookings()){
+                if(booking.getStatus().equals("attended")){
+                    attendees++;
+                }
+            }
+            double income = attendees * lesson.getPrice();
+            
+            switch(lesson.getExerciseType()){
+                case "Yoga":
+                    yogaIncome += income;
+                    break;
+                case "Zumba":
+                    zumbaIncome += income;
+                    break;
+                case "Box Fit":
+                    boxfitIncome += income;
+                    break;
+                case "Aquacise":
+                    aquaIncome += income;
+                    break;
+            }
+        }
+        System.out.println("\n\nIncome Report");
+        
+        System.out.println("Yoga Income: GBP "+yogaIncome);
+        System.out.println("Zumba Income: GBP "+zumbaIncome);
+        System.out.println("Box Fit Income: GBP "+boxfitIncome);
+        System.out.println("Aquacise Income: GBP "+aquaIncome);
+        
+        double maxIncome = Math.max(Math.max(yogaIncome, zumbaIncome), Math.max(boxfitIncome, aquaIncome));
+        
+        if(maxIncome == yogaIncome){
+            System.out.println("Champion Exercise: Yoga");
+        }else if(maxIncome == zumbaIncome){
+            System.out.println("Champion Exercise: Zumba");
+        }else if(maxIncome == boxfitIncome){
+            System.out.println("Champion Exercise: Box Fit");
+        }else{
+            System.out.println("Champion Exercise: Aquacise");
+        }
+        
     }
     
     /// this is main function which is the starting point of the code entry
