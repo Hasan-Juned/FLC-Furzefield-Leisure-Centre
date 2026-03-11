@@ -42,6 +42,7 @@ public class LeisureCentreSystem {
             System.out.println("1. View Lessons");
             System.out.println("2. Book Lesson");
             System.out.println("3. Change/Cancel Booking");
+            System.out.println("4. Attend Lesson");
             System.out.println("0. Exit");
             
             choice = input.nextInt();
@@ -51,6 +52,7 @@ public class LeisureCentreSystem {
                 case 1 -> displayLessons(timeTable.getLesson());
                 case 2 -> bookLesson();
                 case 3 -> changeOrCancelBooking();
+                case 4 -> attendLesson();
             }
             
         }while(choice != 0);
@@ -222,6 +224,44 @@ public class LeisureCentreSystem {
             
             System.out.println("Booking cancelled");
         }
+    }
+    
+    private void attendLesson(){
+        System.out.println("Enter Booking ID: ");
+        String bookingId = input.nextLine();
+        
+        Booking selectedBooking = null;
+        
+        for(Booking b: bookings){
+            if(b.getBookingId().equalsIgnoreCase(bookingId)){
+                selectedBooking = b;
+                break;
+            }
+        }
+        if(selectedBooking == null){
+            System.out.println("Booking not found");
+            return;
+        }
+        System.out.println("Write your review");
+        String review = input.nextLine();
+        
+        System.out.println("Enter rating (1 to 5): ");
+        int rating = input.nextInt();
+        input.nextLine();
+        
+        if(rating < 1 || rating > 5){
+            System.out.println("Please rate us between 1 - 5");
+            return;
+        }
+        
+        selectedBooking.setReview(review);
+        selectedBooking.setRating(rating);
+        selectedBooking.setStatus("attended");
+        
+        Lesson lesson = selectedBooking.getLesson();
+        lesson.addRating(rating);
+        
+        System.out.println("Lesson attended");
     }
     
     /// this is main function which is the starting point of the code entry
