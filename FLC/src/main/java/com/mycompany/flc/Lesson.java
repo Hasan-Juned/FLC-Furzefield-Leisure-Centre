@@ -91,4 +91,26 @@ public class Lesson {
     public void removeBooking(Booking booking){
         bookings.remove(booking);
     }
+    
+    // by this method user can give ratings for a lesson
+    public void addRating(int rating){
+        ratings.add(rating);
+       
+    }
+    
+    /// this method is for overall or avg rating among the all users'
+    
+    public double calculateAvgRating(){
+        if(ratings.isEmpty()){
+            return 0;
+        }
+        int total = 0;
+        
+        for(int r: ratings){
+            total+=r;
+        }
+        return (double) total/ratings.size();
+    }
+    
+    
 }
