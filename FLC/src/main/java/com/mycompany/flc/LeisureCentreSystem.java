@@ -13,6 +13,7 @@ public class LeisureCentreSystem {
     private List<Booking> bookings;
     private TimeTable timeTable;
     private Scanner input; /// this takes input from user or member
+    private int bookingCounter = 1;
     
     /// Constructor
     public LeisureCentreSystem(){
@@ -96,11 +97,13 @@ public class LeisureCentreSystem {
     /// by calling this method, user can see display lessons
     private void displayLessons(List<Lesson> lessons){
         for(Lesson lesson: lessons){
-            System.out.println(lesson.getLessonId() + " | " + 
-                    lesson.getExerciseType() + " | " +
-                    lesson.getDay() + " | "+
-                    lesson.getTimeSlot() + " | GBP" +
-                    lesson.getPrice());
+//            System.out.println(lesson.getLessonId() + " | " + 
+//                    lesson.getExerciseType() + " | " +
+//                    lesson.getDay() + " | "+
+//                    lesson.getTimeSlot() + " | GBP" +
+//                    lesson.getPrice());
+
+              System.out.println(lesson); /// refactored from above because it's more clean with the help of toString method
         }
     }
 
@@ -141,7 +144,11 @@ public class LeisureCentreSystem {
             System.out.println("This lesson is full");
             return;
         }
-        String bookingId = "B" + (bookings.size() + 1);
+        
+        //String bookingId = "B" + (bookings.size() + 1);
+       
+        String bookingId = "B" + bookingCounter; /// refactored for more looking clean compared to above line
+        bookingCounter++;
         
         Booking booking = new Booking(bookingId, selectedMember, lesson);
         
@@ -217,14 +224,14 @@ public class LeisureCentreSystem {
             newLesson.addBooking(selectedBooking);
             
             selectedBooking.setLesson(newLesson);
-            selectedBooking.setStatus("Changed");
+            selectedBooking.setStatus(BookingStatus.CHANGED); /// refactored here: from "Changed" to using enum
             System.out.println("Booking changed Successfully");
             
         } else if(choice == 2){
             Lesson lesson = selectedBooking.getLesson();
             
             lesson.removeBooking(selectedBooking);
-            selectedBooking.setStatus("Cancelled");
+            selectedBooking.setStatus(BookingStatus.CANCELLED);/// refactored here: from "Cancelled" to using enum
             
             System.out.println("Booking cancelled");
         }
@@ -260,7 +267,7 @@ public class LeisureCentreSystem {
         
         selectedBooking.setReview(review);
         selectedBooking.setRating(rating);
-        selectedBooking.setStatus("attended");
+        selectedBooking.setStatus(BookingStatus.ATTENDED); /// refactored here: from "attended" to using enum
         
         Lesson lesson = selectedBooking.getLesson();
         lesson.addRating(rating);
@@ -355,6 +362,4 @@ public class LeisureCentreSystem {
     
     }
 }
-
-
-/// gpt er last er 2 part coding kore project ses
+// hi
