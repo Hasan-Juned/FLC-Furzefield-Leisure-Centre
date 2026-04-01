@@ -48,8 +48,14 @@ public class LeisureCentreSystem {
             System.out.println("6. Champion Exercise Report");
             System.out.println("0. Exit");
             
-            choice = input.nextInt();
-            input.nextLine();
+            String inputChoice = input.nextLine();
+            
+            try{
+                choice = Integer.parseInt(inputChoice);
+            } catch(NumberFormatException e){
+                System.out.println("Invalid input. Exiting...");
+                return;
+            }
             
             switch(choice){
                 case 1 -> displayLessons(timeTable.getLesson());
