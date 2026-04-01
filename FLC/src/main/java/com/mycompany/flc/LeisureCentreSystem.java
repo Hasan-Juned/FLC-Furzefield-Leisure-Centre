@@ -58,6 +58,14 @@ public class LeisureCentreSystem {
                 case 4 -> attendLesson();
                 case 5 -> generateMonthlyLessonReport();
                 case 6 -> generateChampionReport();
+                case 0 -> {
+                    System.out.println("Exiting..."); 
+                    return;
+                }
+                default -> {
+                        System.out.println("Exiting..."); 
+                        return;
+                }
             }
             
         }while(choice != 0);
