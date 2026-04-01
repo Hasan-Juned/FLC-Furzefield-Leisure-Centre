@@ -178,7 +178,7 @@ public class LeisureCentreSystem {
     // this method checks isn't there has any duplicate booking or not, depending on the true/false
     private boolean hasDuplicateBooking(Member member, Lesson lesson){
         for(Booking booking: member.getBookings()){
-            if(booking.getLesson().getLessonId().equals(lesson.getLessonId()) && !booking.getStatus().equals("cancelled")){
+            if(booking.getLesson().getLessonId().equals(lesson.getLessonId()) && booking.getStatus() != BookingStatus.CANCELLED){
                 return true;
             }
         }
@@ -292,7 +292,7 @@ public class LeisureCentreSystem {
             int attendanceCount = 0;
             
             for(Booking booking: lesson.getBookings()){
-                if(booking.getStatus().equals("attended")){
+                if(booking.getStatus() == BookingStatus.ATTENDED){
                     attendanceCount++;
                 }
             }
@@ -317,7 +317,7 @@ public class LeisureCentreSystem {
             int attendees = 0;
             
             for(Booking booking: lesson.getBookings()){
-                if(booking.getStatus().equals("attended")){
+                if(booking.getStatus() == BookingStatus.ATTENDED){
                     attendees++;
                 }
             }
