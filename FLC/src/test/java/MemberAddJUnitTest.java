@@ -49,7 +49,7 @@ public class MemberAddJUnitTest {
         
         m1.addBooking(booking);
         
-        assertEquals(1, m1.getBookings().size());
+        assertEquals(1, m1.getBookings().size()); /// when new member wants to book a lesson then this JUnit will be tested and comapare upto max 4 members, whereas it will be booked or not 
         
         
         

@@ -50,9 +50,9 @@ public class LessonFindJUnitTest {
         
         timeTable.addLesson(lesson);
         
-        Lesson result = timeTable.findLessonById("L1");
+        Lesson result = timeTable.findLessonById("L1"); 
         
-        assertNotNull(result);
+        assertNotNull(result); /// here fetch lesson from lesson class and stored result variable and then by follwoing method assertquals will be tested
         assertEquals("Yoga", result.getExerciseType());
     }
 }

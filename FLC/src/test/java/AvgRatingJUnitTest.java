@@ -49,7 +49,7 @@ public class AvgRatingJUnitTest {
         lesson.addRating(5);
         lesson.addRating(3);
         
-        double avg = lesson.calculateAvgRating();
+        double avg = lesson.calculateAvgRating(); /// here fetch final avg rating from lesson class and stored avg and then by follwoing method assertquals will be tested
         assertEquals(4.0, avg);
     }
 }

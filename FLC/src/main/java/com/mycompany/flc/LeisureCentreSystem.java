@@ -30,11 +30,7 @@ public class LeisureCentreSystem {
     
     @SuppressWarnings("empty-statement")
     public void startMenu(){
-//        System.out.println("All Saturday Lessons: ");
-//        displayLessons(timeTable.searchByDay("Saturday W1"));
-//        
-//        System.out.println("\nAll Yoga lessons:");
-//        displayLessons(timeTable.searchByExercise("Yoga"));
+
         
         int choice;
         
@@ -52,7 +48,7 @@ public class LeisureCentreSystem {
             
             try{
                 choice = Integer.parseInt(inputChoice);
-            } catch(NumberFormatException e){
+            } catch(NumberFormatException e){ /// here used NumberFormatException for safely exiting from program
                 System.out.println("Invalid input. Exiting...");
                 return;
             }
@@ -123,6 +119,7 @@ public class LeisureCentreSystem {
 
     /// this method will create members
     private void createMembers(){
+        /// staticly added the membeer ID and name
         members.add(new Member("M1", "Alice"));
         members.add(new Member("M2", "Bob"));
         members.add(new Member("M3", "Cahrlie"));
@@ -131,9 +128,9 @@ public class LeisureCentreSystem {
     
     private void bookLesson(){
         System.out.println("Enter Member ID: ");
-        String memberId = input.nextLine();
+        String memberId = input.nextLine(); /// takes member id (m1/M1)
         
-        Member selectedMember = null;
+        Member selectedMember = null; /// initially selected member would be null
         
         for(Member m: members){
             if(m.getMemberId().equalsIgnoreCase(memberId)){
@@ -146,7 +143,7 @@ public class LeisureCentreSystem {
             return;
         }
         System.out.println("Enter Lesson ID: ");
-        String lessonId = input.nextLine();
+        String lessonId = input.nextLine(); /// it takes lesson id, which is basically number of the exercise type. when user clicked the view lesson that time all available lessons will come and left side the first one is basically lesson id (like L1, L2)
         
         Lesson lesson = timeTable.findLessonById(lessonId);
         
@@ -159,10 +156,10 @@ public class LeisureCentreSystem {
             return;
         }
         
-        //String bookingId = "B" + (bookings.size() + 1);
+        //String bookingId = "B" + (bookings.size() + 1); /// it is refactored in the following line
        
-        String bookingId = "B" + bookingCounter; /// refactored for more looking clean compared to above line
-        bookingCounter++;
+        String bookingId = "B" + bookingCounter; /// refactored for more looking clean compared to above line. which stores booking ID when booking succeed
+        bookingCounter++; /// booking IDs will be updated
         
         Booking booking = new Booking(bookingId, selectedMember, lesson);
         
@@ -216,7 +213,7 @@ public class LeisureCentreSystem {
         int choice = input.nextInt();
         input.nextLine();
         
-        if(choice == 1){
+        if(choice == 1){ /// this block is for changing lesson 
             System.out.println("Enter new Lesson ID: ");
             String newLessonId = input.nextLine();
             
@@ -241,17 +238,19 @@ public class LeisureCentreSystem {
             selectedBooking.setStatus(BookingStatus.CHANGED); /// refactored here: from "Changed" to using enum
             System.out.println("Booking changed Successfully");
             
-        } else if(choice == 2){
+        } else if(choice == 2){ /// this lesson is for cancelling booking
             Lesson lesson = selectedBooking.getLesson();
             
-            lesson.removeBooking(selectedBooking);
+            /// following lines will be cancelled booking
+            lesson.removeBooking(selectedBooking); 
             selectedBooking.setStatus(BookingStatus.CANCELLED);/// refactored here: from "Cancelled" to using enum
             
             System.out.println("Booking cancelled");
         }
     }
     
-    private void attendLesson(){
+    private void attendLesson(){ /// --> a exercise type attendence will be counted and updated when members click on the attendance functionality. And this proccess will be done by this method
+
         System.out.println("Enter Booking ID: ");
         String bookingId = input.nextLine();
         
@@ -279,8 +278,8 @@ public class LeisureCentreSystem {
             return;
         }
         
-        selectedBooking.setReview(review);
-        selectedBooking.setRating(rating);
+        selectedBooking.setReview(review); /// this method called for setting review - it's not a core part
+        selectedBooking.setRating(rating); /// this method called for seeting rating - it's core part of this project
         selectedBooking.setStatus(BookingStatus.ATTENDED); /// refactored here: from "attended" to using enum
         
         Lesson lesson = selectedBooking.getLesson();
@@ -297,12 +296,12 @@ public class LeisureCentreSystem {
             
             int attendanceCount = 0;
             
-            for(Booking booking: lesson.getBookings()){
+            for(Booking booking: lesson.getBookings()){ /// when differnt booked members attend to do exrcise then this loop will be worked and total attendance will be updated for each exercise type
                 if(booking.getStatus() == BookingStatus.ATTENDED){
                     attendanceCount++;
                 }
             }
-            double avgRating = lesson.calculateAvgRating();
+            double avgRating = lesson.calculateAvgRating(); /// by this method avg rating will be stored. For example one member give 5 rating and other give 2. 5+2 = 7 and 7/2 == 3.5 avg rating.
             
             System.out.println(lesson.getLessonId() + " | " +
                     lesson.getExerciseType() + " | "+

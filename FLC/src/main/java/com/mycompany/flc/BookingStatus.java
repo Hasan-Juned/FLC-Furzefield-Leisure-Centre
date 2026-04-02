@@ -8,7 +8,7 @@ package com.mycompany.flc;
  *
  * @author Hassan
  */
-public enum BookingStatus {
+public enum BookingStatus { /// created enum for more readability and reusability
     
     BOOKED,
     CHANGED,

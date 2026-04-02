@@ -55,13 +55,16 @@ public class Booking {
         this.lesson = lesson;
     }
     
-    public void setStatus(BookingStatus status){ /// refactor here
+    public void setStatus(BookingStatus status){ /// refactored here
         this.status = status;
     }
     
+    /// setter method for setting review
     public void setReview(String review){
         this.review =review;
     }
+    
+    /// setter method for setting rating 1-5
     public void setRating(int rating){
         this.rating = rating;
     }

@@ -51,11 +51,11 @@ public class BookingStatusJUnitTest {
         Member m1 = new Member("M1", "Alice");
         Lesson lesson = new Lesson("L1", "Yoga", "Saturday", "Morning", 10);
         
-        Booking booking = new Booking("B1", m1, lesson);
+        Booking booking = new Booking("B1", m1, lesson); 
         
         booking.setStatus(BookingStatus.ATTENDED); /// refactored from "attended" string to enum ATTENDED to maintain clean code
         
-        assertEquals(BookingStatus.ATTENDED, booking.getStatus());
+        assertEquals(BookingStatus.ATTENDED, booking.getStatus()); /// here fetch booking status from Booking class and by follwoing method assertquals will be tested
                 
         
     }
